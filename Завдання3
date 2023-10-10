@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+
+        System.out.print("Введіть розмірність матриці (n): ");
+        int n = scanner.nextInt();
+
+
+        int[][] matrix = new int[n][n];
+
+
+        // Заповнення матриці випадковими числами в інтервалі від -n до n
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = (int) (Math.random() * (2 * n + 1)) - n;
+            }
+        }
+
+
+        // Виведення матриці
+        System.out.println("Згенерована матриця:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
+
+
+        // Пошук найменшого серед локальних максимумів
+        int minLocalMax = Integer.MAX_VALUE;
+        for (int i = 1; i < n - 1; i++) {
+            for (int j = 1; j < n - 1; j++) {
+                int currentElement = matrix[i][j];
+                if (currentElement > matrix[i - 1][j] && currentElement > matrix[i + 1][j] &&
+                    currentElement > matrix[i][j - 1] && currentElement > matrix[i][j + 1]) {
+                    if (currentElement < minLocalMax) {
+                        minLocalMax = currentElement;
+                    }
+                }
+            }
+        }
+
+
+        if (minLocalMax == Integer.MAX_VALUE) {
+            System.out.println("У матриці немає локальних максимумів.");
+        } else {
+            System.out.println("Найменший серед локальних максимумів: " + minLocalMax);
+        }
+
+
+        scanner.close();
+    }
+}
