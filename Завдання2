@@ -1,0 +1,27 @@
+public class Main {
+    public static void main(String[] args) {
+        int k = 16; // Задайте значення k (кількість чисел)
+        int N = (int) Math.ceil(Math.sqrt(k)); // Розрахунок розміру матриці NxN
+
+        int[][] matrix = new int[N][N];
+        int num = 1;
+
+        // Заповнення матриці числами від 1 до k
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (num <= k) {
+                    matrix[i][j] = num;
+                    num++;
+                }
+            }
+        }
+
+        // Виведення матриці
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
+    }
+}
