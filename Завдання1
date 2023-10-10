@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int n;
+        System.out.print("Vedit kilkist chisel: ");
+        n = scanner.nextInt();
+        
+        int firstPalindrome = -1;
+        int secondPalindrome = -1;
+        int countPalindromes = 0;
+        
+        for (int i = 0; i < n; i++) {
+            System.out.print("Vedit chislo: ");
+            int number = scanner.nextInt();
+            
+            if (isPalindrome(number)) {
+                if (countPalindromes == 0) {
+                    firstPalindrome = number;
+                    countPalindromes++;
+                } else if (countPalindromes == 1) {
+                    secondPalindrome = number;
+                    countPalindromes++;
+                }
+            }
+        }
+        
+        if (countPalindromes >= 2) {
+            System.out.println("pershii polinom: " + firstPalindrome);
+            System.out.println("drygii polinom: " + secondPalindrome);
+        } else if (countPalindromes == 1) {
+            System.out.println("lishe 1 polinom: " + firstPalindrome);
+        } else {
+            System.out.println("ne znaideno polinomiv.");
+        }
+        
+        scanner.close();
+    }
+    
+   
+    public static boolean isPalindrome(int number) {
+        int originalNumber = number;
+        int reversedNumber = 0;
+        
+        while (number > 0) {
+            int digit = number % 10;
+            reversedNumber = reversedNumber * 10 + digit;
+            number /= 10;
+        }
+        
+        return originalNumber == reversedNumber;
+    }
+}
